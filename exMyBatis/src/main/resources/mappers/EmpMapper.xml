@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mnu.mybatis.mapper.EmpMapper">
+
+	<!-- 1. emp테이블이 존재하는 총 사원수(튜플) 카운트 -->
+	<select id="empCount" resultType="int">
+	       select count(*) from emp
+	</select>
+	<!-- 2. 부서번호가 xx인 사원수 -->
+	<select id="empDnoCount" resultType="int">
+	      select count(*) from emp where dno=#{dno}
+	</select>
+	<!-- 전체목록 -->
+	<select id="empList" resultType="com.mnu.mybatis.domain.EmpDTO">
+	      select * from emp order by eno desc
+	</select>
+	
+	<!--특정부서 전체목록 -->
+	<select id="empDnoList" resultType="com.mnu.mybatis.domain.EmpDTO">
+	      select * from emp where dno=#{dno} order by eno desc
+	</select>
+	
+	<!-- 특정사원검색 -->
+	<select id="empEnoList" resultType="com.mnu.mybatis.domain.EmpDTO">
+	      select * from emp where eno=#{eno}
+	</select>
+	
+	<!-- Dept 테이블에 등록 -->
+	<insert id="deptWrite">
+	     insert into dept(dno,dname,loc) values(#{dno},#{dname},#{loc})
+	</insert>
+	
+	<!-- dept테이블 업데이트(수정) -->
+	<update id="deptUpdate">
+	      update dept set dname=#{dname}, loc=#{loc} where dno=#{dno}
+	</update>
+	
+	<!-- dept 테이블 삭제 -->
+	<delete id="deptDelete">
+	      delete from dept where dno=#{dno}
+	</delete>
+	
+</mapper>
