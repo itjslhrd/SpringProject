@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mnu.sample.domain.BoardDTO;
 import com.mnu.sample.service.BoardService;
 
 @Controller
@@ -48,4 +49,17 @@ public class BoardController {
 		return "";
 	}
 */	
+	//글 등록 폼
+	@GetMapping("board_write")
+	public String boardWrite() {
+		return "Board/board_write";
+	}
+	
+	//글 등록처리
+	@PostMapping("board_write")
+	public String boardWritePro(BoardDTO boardDTO) {
+		int row = boardService.boardWrite(boardDTO);
+		return "redirect:board_list";
+		//return "redirect:/"; //index로 이동시
+	}
 }

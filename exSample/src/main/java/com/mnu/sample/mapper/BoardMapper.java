@@ -21,6 +21,7 @@ public interface BoardMapper {
 	public List<BoardDTO> boardListSearch(String search, String key);
 
 	//5. 글 등록 
+	public int boardWrite(BoardDTO boardDTO);
 	
 	//6. 특정글 검색(view, 수정)
 	

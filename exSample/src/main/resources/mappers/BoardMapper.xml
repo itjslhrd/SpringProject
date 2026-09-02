@@ -98,7 +98,10 @@
 	</select>	
  -->
 	<!-- 5. 글 등록 -->
-	
+	<insert id="boardWrite">
+		insert into tbl_board(idx, name, email,subject, contents, pass)
+		       values(tbl_board_seq_idx.nextval,#{name},#{email},#{subject},#{contents},#{pass})
+	</insert>
 	<!-- 6. 특정글 검색(view, 수정) -->
 	
 	<!-- 7. 수정처리 -->
