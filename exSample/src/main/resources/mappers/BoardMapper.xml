@@ -126,6 +126,12 @@
 		       values(tbl_board_seq_idx.nextval,#{name},#{email},#{subject},#{contents},#{pass})
 	</insert>
 	<!-- 6. 특정글 검색(view, 수정) -->
+	<update id="boardHits">
+		update tbl_board set readcnt = readcnt + 1 where idx = #{idx}
+	</update>
+	<select id="boardView" resultType="com.mnu.sample.domain.BoardDTO">
+		select * from tbl_board where idx = #{idx}
+	</select>
 	
 	<!-- 7. 수정처리 -->
 	

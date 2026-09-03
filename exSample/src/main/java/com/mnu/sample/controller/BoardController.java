@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mnu.sample.domain.BoardDTO;
 import com.mnu.sample.domain.PageSearchDTO;
@@ -177,15 +178,26 @@ public class BoardController {
 	
 	//글 등록 폼
 	@GetMapping("board_write")
-	public String boardWrite() {
+	public String boardWrite(@ModelAttribute("page") int page) {
 		return "Board/board_write";
 	}
 	
 	//글 등록처리
 	@PostMapping("board_write")
-	public String boardWritePro(BoardDTO boardDTO) {
+	public String boardWritePro(@ModelAttribute("page") int page, BoardDTO boardDTO) {
 		int row = boardService.boardWrite(boardDTO);
-		return "redirect:board_list";
+		return "redirect:board_list?page=" + page;
 		//return "redirect:/"; //index로 이동시
 	}
+	
+	//상세보기(view)
+	@GetMapping("board_view")
+	public String boardView(@ModelAttribute("page") int page, 
+										@RequestParam("idx") int idx, Model model) {
+		
+		model.addAttribute("board", boardService.boardView(idx));
+		return "Board/board_view";
+	}
+	
+	
 }

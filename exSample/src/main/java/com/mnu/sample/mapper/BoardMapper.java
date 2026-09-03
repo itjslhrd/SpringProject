@@ -30,6 +30,9 @@ public interface BoardMapper {
 	public int boardWrite(BoardDTO boardDTO);
 	
 	//6. 특정글 검색(view, 수정)
+	public void boardHits(int idx);//조회수 증가
+	
+	public BoardDTO boardView(int idx);
 	
 	//7. 수정처리
 	

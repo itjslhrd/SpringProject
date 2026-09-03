@@ -3,6 +3,7 @@ package com.mnu.sample.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.server.Cookie;
 import org.springframework.stereotype.Service;
 
 import com.mnu.sample.domain.BoardDTO;
@@ -51,8 +52,19 @@ public class BoardService {
 	public int boardWrite(BoardDTO boardDTO) {
 		return boardMapper.boardWrite(boardDTO);
 	}
-	//6. 특정글 검색(view, 수정)
-	
+	//6. 특정글 검색(view, 수정), 조회수 증가
+	public BoardDTO boardView(int idx) {
+		//쿠키설정
+		boolean bool = false;
+		Cookie info = null;
+		
+		boardMapper.boardHits(idx);
+		BoardDTO board = boardMapper.boardView(idx);
+		board.setContents(board.getContents().replace("\n", "<br>"));
+		
+		return board;
+		
+	}
 	//7. 수정처리
 	
 	//8. 삭제처리
