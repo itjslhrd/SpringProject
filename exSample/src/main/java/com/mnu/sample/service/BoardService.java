@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mnu.sample.domain.BoardDTO;
+import com.mnu.sample.domain.PageSearchDTO;
 import com.mnu.sample.mapper.BoardMapper;
 
 @Service
@@ -31,9 +32,19 @@ public class BoardService {
 		return boardMapper.boardList();
 	}
 	
+	//3-1. 전체목록 리스트(페이지 인덱싱)
+	public List<BoardDTO> boardListPage(PageSearchDTO pageSearchDTO){
+		return boardMapper.boardListPage(pageSearchDTO);
+	}
+	
 	//4. 검색조건에 맞는 글 리스트
 	public List<BoardDTO> boardListSearch(String search, String key){
 		return boardMapper.boardListSearch(search, key);
+	}
+
+	//4-1. 검색조건 + 페이지 인덱싱 리스트
+	public List<BoardDTO> boardListSearchPage(PageSearchDTO pageSearchDTO){
+		return boardMapper.boardListSearchPage(pageSearchDTO);
 	}
 
 	//5. 글 등록 
