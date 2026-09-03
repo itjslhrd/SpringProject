@@ -19,6 +19,9 @@ import com.mnu.sample.domain.PageSearchDTO;
 import com.mnu.sample.service.BoardService;
 import com.mnu.sample.util.PageIndex;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping("Board")
 public class BoardController {
@@ -193,11 +196,41 @@ public class BoardController {
 	//상세보기(view)
 	@GetMapping("board_view")
 	public String boardView(@ModelAttribute("page") int page, 
-										@RequestParam("idx") int idx, Model model) {
+										@RequestParam("idx") int idx, Model model, HttpServletRequest request, HttpServletResponse response) {
 		
-		model.addAttribute("board", boardService.boardView(idx));
+		model.addAttribute("board", boardService.boardView(idx, request, response));
 		return "Board/board_view";
 	}
 	
-	
+	//수정
+	@GetMapping("board_modify")
+	public String boardModify(@ModelAttribute("page") int page, @RequestParam("idx") int idx , Model model) {
+		
+		model.addAttribute("board", boardService.boardModify(idx));
+		return "Board/board_modify";
+	}
+
+	//수정 처리
+	@PostMapping("board_modify")
+	public String boardModifyPro(@ModelAttribute("page") int page, BoardDTO boardDTO, Model model) {
+		
+		model.addAttribute("row", boardService.boardModifyPro(boardDTO));
+		return "Board/board_modify_pro";
+	}
+
+	//삭제폼
+	@GetMapping("board_delete")
+	public String boardDelete(@ModelAttribute("page") int page, @ModelAttribute("idx") int idx) {
+		return "/Board/board_delete";
+	}
+
+	//삭제처리
+	@PostMapping("board_delete")
+	public String boardDeletePro(@ModelAttribute("page") int page, BoardDTO boardDTO, Model model) {
+		
+		model.addAttribute("row", boardService.boardDelete(boardDTO));
+		return "/Board/board_delete_pro";
+	}
+
+
 }

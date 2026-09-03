@@ -10,7 +10,12 @@
      td.content { padding:10px; line-height:1.6em; text-align:justify; }
      a.list { text-decoration:none;color:black;font-size:10pt; }
    </style>
-
+<script>
+	function board_delete(){
+		var url="/Board/board_delete?idx=${board.idx}&page=${page}";
+		window.open(url,"board_delete","width=350, height=250");
+	}
+</script>
  </head>
  <body topmargin="0" leftmargin="0">
    <table border="0" width="800">
@@ -49,18 +54,18 @@
       <p align="center">
       <font size="2">
        <!-- 새글쓰기 -->
-       <a href="">
+       <a href="/Board/board_write?page=${page}">
        <img src="/Images/img/write.jpg" border="0"></a>&nbsp;&nbsp;
 	   <!-- 답글쓰기 -->
        <a href="">
        <img src="/Images/img/reply.gif" border="0"></a>&nbsp;&nbsp;
 	   <!-- 수정하기 -->
-       <a href="">
+       <a href="/Board/board_modify?idx=${board.idx}&page=${page}">
        <img src="/Images/img/edit.gif" border="0"></a>&nbsp;&nbsp;
          <!-- 삭제하기 -->
-       <a href=""><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
+       <a href="javascript:board_delete();"><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
        <!-- 목록보기 -->
-       <a href=""><img src="/Images/img/list-2.gif" border="0"></a>&nbsp;&nbsp;
+       <a href="/Board/board_list?page=${page}"><img src="/Images/img/list-2.gif" border="0"></a>&nbsp;&nbsp;
       </font>
     </td>
   </tr>

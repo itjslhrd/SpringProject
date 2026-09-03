@@ -134,8 +134,13 @@
 	</select>
 	
 	<!-- 7. 수정처리 -->
-	
+	<update id="boardModifyPro">
+		update tbl_board set email=#{email}, subject=#{subject}, contents=#{contents}
+						where idx=#{idx} and pass=#{pass}
+	</update>
 	<!-- 8. 삭제처리 -->
-	
+	<delete id="boardDelete">
+		delete from tbl_board where idx=#{idx} and pass=#{pass}
+	</delete>
 
 </mapper>

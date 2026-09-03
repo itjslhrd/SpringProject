@@ -3,12 +3,15 @@ package com.mnu.sample.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.server.Cookie;
 import org.springframework.stereotype.Service;
 
 import com.mnu.sample.domain.BoardDTO;
 import com.mnu.sample.domain.PageSearchDTO;
 import com.mnu.sample.mapper.BoardMapper;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class BoardService {
@@ -53,20 +56,49 @@ public class BoardService {
 		return boardMapper.boardWrite(boardDTO);
 	}
 	//6. 특정글 검색(view, 수정), 조회수 증가
-	public BoardDTO boardView(int idx) {
+	public BoardDTO boardView(int idx,  HttpServletRequest request, HttpServletResponse response) {
 		//쿠키설정
 		boolean bool = false;
 		Cookie info = null;
+		Cookie[] cookies = request.getCookies();
+		for(int i=0; i<cookies.length; i++) {
+			info = cookies[i];
+			if(info.getName().equals("boardCookie"+idx)) {
+				bool = true;
+				break;
+			}
+		}
+		String str = ""+System.currentTimeMillis();
+		if(!bool) {
+			//쿠키생성
+			info = new Cookie("boardCookie"+idx, str);
+			//info.setMaxAge(24*60*60);//1일
+			info.setMaxAge(60*5);//5분
+			response.addCookie(info);
+			boardMapper.boardHits(idx);	
+		}
 		
-		boardMapper.boardHits(idx);
 		BoardDTO board = boardMapper.boardView(idx);
 		board.setContents(board.getContents().replace("\n", "<br>"));
 		
 		return board;
 		
 	}
-	//7. 수정처리
-	
+	//7. 수정처리(폼)
+	public BoardDTO boardModify(int idx) {
+		return boardMapper.boardView(idx);
+	}
+
+	//7. 수정처리(처리)
+	public int boardModifyPro(BoardDTO boardDTO) {
+		
+		return boardMapper.boardModifyPro(boardDTO);
+	}
+
 	//8. 삭제처리
+	public int boardDelete(BoardDTO boardDTO) {
+		
+		return boardMapper.boardDelete(boardDTO);
+	}
 
 }

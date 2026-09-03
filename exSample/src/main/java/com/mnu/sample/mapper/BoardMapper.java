@@ -34,8 +34,10 @@ public interface BoardMapper {
 	
 	public BoardDTO boardView(int idx);
 	
-	//7. 수정처리
+	//7. 수정처리 처리
+	public int boardModifyPro(BoardDTO boardDTO);
 	
 	//8. 삭제처리
+	public int boardDelete(BoardDTO boardDTO);
 	
 }
