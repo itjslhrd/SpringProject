@@ -13,12 +13,20 @@ public class PdsController {
 	private static final Logger log =
 			LoggerFactory.getLogger(PdsController.class);
 
-	//공지사항 리스트
+	// 자료실 리스트
 	@GetMapping("pds_list")
 	public String pdsList() {
 		log.info("Pds Call : pds_list");
 		
 		return "Pds/pds_list";
+	}
+
+	// 등록 폼
+	@GetMapping("pds_write")
+	public String pdsWrite() {
+		log.info("Pds Call : pds_write");
+		
+		return "Pds/pds_write";
 	}
 
 }

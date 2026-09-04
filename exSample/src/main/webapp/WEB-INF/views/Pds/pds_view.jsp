@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ include file="/Include/topmenu.jsp" %>
+<%@ include file="../Include/topmenu.jsp" %>
 
 <html>
    <head>
@@ -20,7 +20,7 @@
      <td width="20%"  height="500" bgcolor="#ecf1ef" valign="top">
 
 		<!--  로그인 폼 추가 -->
-		<jsp:include page="/Include/login_form.jsp" /> 
+		<jsp:include page="../Include/login_form.jsp" /> 
 
      </td>
      <td width="80%" valign="top">

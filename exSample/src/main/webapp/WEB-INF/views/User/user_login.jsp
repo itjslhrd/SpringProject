@@ -5,13 +5,12 @@
 <HEAD>
 <TITLE>로그온</TITLE>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<STYLE TYPE="text/css">
-<!--
-body { font-family: 돋움, Verdana; font-size: 9pt}
-td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; color: #000000; 
-      BACKGROUND-POSITION: left top; BACKGROUND-REPEAT: no-repeat;}
-//-->
-</STYLE>
+   <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+   <style type="text/css">
+     td.title { padding:4px; background-color:#e3e9ff }
+     td.content { padding:10px; line-height:1.6em; text-align:justify; }
+     a.list { text-decoration:none;color:black;font-size:10pt; }
+   </style>
 
 </HEAD>
 <body bgcolor="#FFFFFF" text="#000000" leftmargin=0 

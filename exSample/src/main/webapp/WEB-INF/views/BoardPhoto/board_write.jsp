@@ -1,14 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
-<%@ include file="/Include/topmenu.jsp" %>
+<%@ include file="../Include/topmenu.jsp" %>
 
 <html>
    <head><title>게시판 작성</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
-<!-- include libraries(jQuery, bootstrap) -->
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+  a.list {text-decoration:none;color:black;font-size:10pt;}
+</style>
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.css" rel="stylesheet">
@@ -41,7 +40,7 @@
    <td width="20%" height="500" bgcolor="#ecf1ef" valign="top">
 
    <!-- 다음에 추가할 부분 -->
-	<jsp:include page="/Include/login_form.jsp" /> 
+	<jsp:include page="../Include/login_form.jsp" /> 
    </td>
 
    <td width="80%" valign="top">&nbsp;<br>

@@ -13,12 +13,20 @@ public class BoardPhotoController {
 	private static final Logger log =
 			LoggerFactory.getLogger(BoardPhotoController.class);
 
-	//공지사항 리스트
+	// 리스트
 	@GetMapping("board_list")
 	public String boardList() {
 		log.info("BoardPhoto Call : board_list");
 		
 		return "BoardPhoto/board_list";
+	}
+
+	// 등록
+	@GetMapping("board_write")
+	public String boardWrite() {
+		log.info("BoardPhoto Call : board_write");
+		
+		return "BoardPhoto/board_write";
 	}
 
 }

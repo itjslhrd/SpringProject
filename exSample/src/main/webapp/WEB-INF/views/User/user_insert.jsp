@@ -3,17 +3,13 @@
 <html>
 <head>
 <title>회원등록</title>
-<STYLE TYPE="text/css">
-<!--
-body { font-family: 돋움, Verdana; font-size: 9pt}
-td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; color: #000000; BACKGROUND-POSITION: left top; BACKGROUND-REPEAT: no-repeat;}
--->
-.formbox {
-	BACKGROUND-COLOR: #F0F0F0; FONT-FAMILY: "Verdana", "Arial", "Helvetica", "돋움"; FONT-SIZE:9pt
-} 
---->
-<link rel="stylesheet" type="text/css" href="/css/stylesheet.css">
-</STYLE>
+   <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+   <style type="text/css">
+     td.title { padding:4px; background-color:#e3e9ff }
+     td.content { padding:10px; line-height:1.6em; text-align:justify; }
+     a.list { text-decoration:none;color:black;font-size:10pt; }
+   </style>
+
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> 
 <script type="text/javascript">
 $(function(){
