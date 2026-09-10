@@ -42,93 +42,119 @@
 <TR>
   <TD width=100>&nbsp;</td>
   <TD>
-    <table width="583" border="0" cellspacing="0" cellpadding="0" height="265">
-	  <form name="user" method=post action="/User/user_login">
-	    <tr>
-		  <td height="298"> 
-		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-			  <tr> 
-			    <td width="9"><img src="/Images/img/h_b02.gif" width="9" height="21"></td>
-				<td bgcolor="7aaad5"> 
-				 <div align="center"><font color="#FFFFFF"><b>Member Login</b></font></div>
-				 </td>
-				 <td width="9"><img src="/Images/img/f_b03.gif" width="9" height="21"></td>
-			  </tr>
-			 </table>
-			 <table border="0" cellpadding="0" cellspacing="0" width="550">
-			   <tr> 
-			     <td bgcolor="#7aaad5"> 
-				   <table border="0" cellpadding="3" cellspacing="1" width="99%" height="321">
-				     <tr bgcolor="#FFFFFF"> 
-					   <td align=CENTER bgcolor="#eff4f8" height="92"> 
-					     <table width="330" border="0" cellspacing="0" cellpadding="1">
-							<tr valign=bottom> 
-							  <td width="21"><img src="/Images/img/h_bl02.gif" width="18" height="16"></td>
-							  <td width="55" nowrap>아 이 디</td>
-							  <td width="175">: 
-								<input type=text name="userid" size=16 maxlength=16 STYLE="WIDTH:155">
-							  </td>
-							  <td width="79"></td>
-							</tr>
-							<tr valign=bottom> 
-							  <td><img src="/Images/img/h_bl02.gif" width="18" height="16"></td>
-							  <td nowrap>비밀번호</td>
-							  <td>: 
-								<input type=password name="passwd" size=14 maxlength=12 STYLE="WIDTH:155">
-							  </td>
-							  <td><img src="/Images/img/login.gif" border=0 align=absmiddle onClick="user_login()"></td>
-							</tr>
-						  </table>
-						</td>
-					  </tr>
-					  <tr bgcolor="#FFFFFF"> 
-						<td bgcolor="#ffffff" align=CENTER height="138"> 
-							[아이디찾기] &nbsp;&nbsp; [비밀번호찾기]
-						</td>
-					  </tr>
-
-					  <tr bgcolor="#FFFFFF"> 
-						<td bgcolor="#ffffff" align=CENTER height="138"> 
-						  <table width="600" border="0" cellspacing="0" cellpadding="0">
-							<tr> 
-							  <td> 
-								<table cellpadding=2 cellspacing=0 align=center border=0>
-								  <tr> 
-									<td> 
-										<p style="LINE-HEIGHT:15PX;"><font color="#AFAFB1">
-										이곳은 JSP를 배우고자 하는 분이면 누구나
-										   <FONT COLOR="#006F70">회원가입 할 수 있는 </FONT>곳입니다.<BR><BR>
-									</td> 
-								  </tr> 
-					              <tr> 
-							        <td> 
-							          <p style="LINE-HEIGHT:15PX;"><font color="#AFAFB1">아이디가 
-								      없으신 분은 
-							          <font color="#ff7508">이용자가입</font>을 하시기 바랍니다.<br>
-							            <br>
-							            <br>
-							          </p>
-							       </td>
-							      </tr>
-						         </table>
-						       </td>
-					         </tr>
-					       </table>
-				         </td>
-				       </tr>
-			         </table>
-			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr> 
-				  <td width="9"><img src="/Images/img/h_b04.gif" width="12" height="11"></td>
-				  <td bgcolor="7aaad5" width="612"> 
-					<div align="center"></div>
-				  </td>
-				  <td width="10"><img src="/Images/img/h_b05.gif" width="12" height="11"></td>
-				</tr>
-			  </table>
-			</td>
-  		</tr>
-		</table>
+<TABLE width="683" border="0" cellspacing="0" cellpadding="0" height="265"> 
+  <TR> 
+    <TD width=100>&nbsp;</TD> 
+    <TD> 
+      <table width="583" border="0" cellspacing="0" cellpadding="0" height="265"> 
+        <tr> 
+          <td height="298"> 
+            <!-- 상단 타이틀 바 -->
+            <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
+              <tr> 
+                <td width="9"><img src="/Images/img/h_b02.gif" width="9" height="21"></td> 
+                <td bgcolor="7aaad5"> 
+                  <div align="center"><font color="#FFFFFF"><b>마이페이지 (My Page)</b></font></div> 
+                </td> 
+                <td width="9"><img src="/Images/img/f_b03.gif" width="9" height="21"></td> 
+              </tr> 
+            </table> 
+            
+            <table border="0" cellpadding="0" cellspacing="0" width="550"> 
+              <tr> 
+                <td bgcolor="#7aaad5"> 
+                  <table border="0" cellpadding="3" cellspacing="1" width="99%" height="321"> 
+                    
+                    <!-- 회원 정보 및 아바타 영역 -->
+                    <tr bgcolor="#FFFFFF"> 
+                      <td align=CENTER bgcolor="#eff4f8" height="120"> 
+                        <table width="480" border="0" cellspacing="0" cellpadding="3"> 
+                          <tr valign=middle> 
+                            <!-- 아바타 이미지 및 변경 버튼 -->
+                            <td width="100" align="center" style="padding-right: 15px;">
+                              <!-- JSP 연동 시 기존 등록된 아바타 경로 적용 -->
+                              <img src="/Images/avatar/default.gif" width="70" height="70" style="border: 1px solid #7aaad5; border-radius: 4px;"><br>
+                              <input type="button" value="아바타 변경" onClick="location.href='/User/avatar_change'" style="width:75px; height:18px; font-size:11px; margin-top:5px; background-color:#ffffff; color:#7aaad5; border:1px solid #7aaad5; cursor:pointer;">
+                            </td>
+                            <!-- 회원 상세 정보 -->
+                            <td width="380">
+                              <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                <tr>
+                                  <td width="21"><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 
+                                  <td width="70" nowrap><b>회원명</b></td> 
+                                  <td>: 홍길동 님 (일반회원)</td> 
+                                </tr>
+                                <tr>
+                                  <td><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 
+                                  <td nowrap><b>아이디</b></td> 
+                                  <td>: hong123</td> 
+                                </tr>
+                                <tr>
+                                  <td><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 
+                                  <td nowrap><b>이메일</b></td> 
+                                  <td>: hong123@example.com</td> 
+                                </tr>
+                              </table>
+                            </td>
+                          </tr> 
+                        </table> 
+                      </td> 
+                    </tr> 
+                    
+                    <!-- 나의 활동 정보 영역 (작성글 / 댓글수) -->
+                    <tr bgcolor="#FFFFFF">
+                      <td align="CENTER" bgcolor="#ffffff" height="50">
+                        <table width="450" border="0" cellspacing="0" cellpadding="0" style="border:1px dashed #7aaad5; padding:10px 0;">
+                          <tr>
+                            <td width="50%" align="center" style="border-right:1px solid #eff4f8;">
+                              <font color="#555555">내가 작성한 글</font><br>
+                              <!-- JSP 연동 시 동적 카운트 변수 삽입 공간 -->
+                              <a href="/Board/my_posts" style="text-decoration:none;"><font color="#006F70" size="4"><b>12</b></font> <font color="#aaa" size="1">개</font></a>
+                            </td>
+                            <td width="50%" align="center">
+                              <font color="#555555">내가 작성한 댓글</font><br>
+                              <!-- JSP 연동 시 동적 카운트 변수 삽입 공간 -->
+                              <a href="/Board/my_comments" style="text-decoration:none;"><font color="#ff7508" size="4"><b>34</b></font> <font color="#aaa" size="1">개</font></a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    
+                    <!-- 마이페이지 주요 메뉴 버튼 영역 -->
+                    <tr bgcolor="#FFFFFF"> 
+                      <td bgcolor="#ffffff" align=CENTER height="50"> 
+                        <table border="0" cellspacing="0" cellpadding="5">
+                          <tr>
+                            <td><input type="button" value="정보수정" onClick="location.href='/User/user_modify'" style="width:90px; height:30px; background-color:#7aaad5; color:white; border:none; font-weight:bold; cursor:pointer;"></td>
+                            <td><input type="button" value="비밀번호변경" onClick="location.href='/User/password_change'" style="width:100px; height:30px; background-color:#7aaad5; color:white; border:none; font-weight:bold; cursor:pointer;"></td>
+                            <td><input type="button" value="로그아웃" onClick="location.href='/User/user_logout'" style="width:90px; height:30px; background-color:#a1afbc; color:white; border:none; font-weight:bold; cursor:pointer;"></td>
+                          </tr>
+                        </table>
+                      </td> 
+                    </tr> 
+                    
+                  </table> 
+                  
+                  <!-- 하단 테두리 바 -->
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0"> 
+                    <tr> 
+                      <td width="9"><img src="/Images/img/h_b04.gif" width="12" height="11"></td> 
+                      <td bgcolor="7aaad5" width="612"> 
+                        <div align="center"></div> 
+                      </td> 
+                      <td width="10"><img src="/Images/img/h_b05.gif" width="12" height="11"></td> 
+                    </tr> 
+                  </table> 
+                </td> 
+              </tr> 
+            </table> 
+          </td> 
+        </tr> 
+      </table> 
+    </TD> 
+  </TR> 
+</TABLE>
 	</TD>
 </TR>
 </TABLE>

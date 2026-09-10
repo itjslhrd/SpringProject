@@ -119,7 +119,7 @@ $(function(){
 			return;
 		}
 		
-		var email = $("#email1").val() + "@" + $("#email1").val();
+		var email = $("#email1").val() + "@" + $("#email2").val();
 		$("#email").val(email);//form 태그의 email에 값 설정
 		
 		$.ajax({
@@ -287,8 +287,8 @@ $(function(){
                 					<font color=red>&nbsp;</font>
 								</td>
 								<td bgcolor=WHITE valign=middle>
-									<input type="text" name="email1" id="email1" size=13 maxlength="15">
-									@ <input type="text" name="email2" id="email2" size=13 maxlength="15">
+									<input type="text" name="email1" id="email1" size=10 maxlength="15">
+									@ <input type="text" name="email2" id="email2" size=10 maxlength="15">
 									<select name="email3" id="email3">
 		      							<option value="0">직접입력</option>
 		      							<option value="naver.com">naver.com</option>

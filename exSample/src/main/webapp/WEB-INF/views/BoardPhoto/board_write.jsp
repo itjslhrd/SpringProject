@@ -26,8 +26,28 @@
 		});
 	});
 
-	function send(){
-		alert("등록합니다");
+	function board_send(){
+		if(!board.name.value){
+			alert("이름을 입력하세요");
+			board.name.focus();
+			return;
+		}
+		if(!board.subject.value){
+			alert("제목을 입력하세요");
+			board.subject.focus();
+			return;
+		}
+		if(!board.contents.value){
+			alert("내용을 입력하세요");
+			board.contents.focus();
+			return;
+		}
+		if(!board.pass.value){
+			alert("비밀번호을 입력하세요");
+			board.pass.focus();
+			return;
+		}
+		
 		board.submit();
 		
 	}
@@ -48,8 +68,8 @@
      <font size="2"> - 글쓰기</font><p>
      <img src="/Images/img/bullet-03.gif"><font size="2" face="돋움" color="orange"> 잠깐</font> &nbsp;
      <img src="/Images/img/bullet-02.gif"><font size="2" face="돋움">는 필수 입력 사항입니다.</font><p>
-     <form method="post">
-
+     <form name="board" method="post" action="/BoardPhoto/board_write">
+	  <input type="hidden" name="page" value="${page}">
 	  <table border="0">
        <tr>
          <td width="5%" align="right"><img src="/Images/img/bullet-02.gif"></td>
@@ -77,8 +97,8 @@
           <td align="right">&nbsp;</td>
           <td><font size="2">&nbsp;</font></td>
           <td>
-                     <a href="#"><img src="/Images/img/save.gif" border=0></a>&nbsp;&nbsp;&nbsp;
-                     <a href="#"><img src="/Images/img/cancle.gif" border=0></a>
+                     <a href="javascript:board_send()"><img src="/Images/img/save.gif" border=0></a>&nbsp;&nbsp;&nbsp;
+                     <a href="javascript:history.back()"><img src="/Images/img/cancle.gif" border=0></a>
           </td>
         </tr>
       </table>

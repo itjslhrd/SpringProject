@@ -98,8 +98,7 @@ public class UserController {
 		log.info("인증번호 : " + tempNum);
 		return tempNum;
 	}
-	
-	
+		
 	//보인인증(email)
 	@ResponseBody
 	@PostMapping("user_email")
@@ -139,4 +138,12 @@ public class UserController {
 	
 	//비번분실시 id를 찾어서 임시비번 발송
 
+	//마이페이지 
+	@GetMapping("user_mypage")
+	public String userMyPage() {
+		log.info("User Call : userMyPage");
+		
+		return "User/user_mypage";
+	}
+	
 }

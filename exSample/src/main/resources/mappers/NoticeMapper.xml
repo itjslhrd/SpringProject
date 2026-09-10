@@ -39,6 +39,24 @@
 	     	</choose>
 	</select>
 	
+	<!-- 2. 검색조건에 해당하는 글수  MySQL(MariDB)  -->
+<!-- 	
+	<select id="boardCountSearch" resultType="int">
+	     select count(*) from tbl_notice where 
+	     	<choose>
+	     		<when test="search=='name'">
+	     			name like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='subject'">
+	     			subject like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='contents'">
+	     			contents like concat('%',#{key},'%')
+	     		</when>
+	     	</choose>
+	</select>
+ -->
+	
 	<!--3. 공지사항 목록(검색+페이지) 겸용-->
 	<select id="noticeList" resultType="com.mnu.sample.domain.NoticeDTO">
 		select * from tbl_notice  
@@ -57,6 +75,28 @@
  	                  offset #{offset} rows fetch next #{maxlist} rows only 	
 	
 	</select>
+	
+	<!-- MySQL 용  --> 	
+ 	<!-- 검색조건 + 페이지 인덱싱 리스트 (get, post 겸용)-->
+<!--  	
+ 	<select id="boardList" resultType="com.mnu.sample.domain.NoticeDTO">
+	     select * from tbl_notice	
+	     	<choose>
+	     		<when test="search=='name'">
+	     			where name like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='subject'">
+	     			where subject like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='contents'">
+	     			where contents like concat('%',#{key},'%')
+	     		</when>
+	     	</choose>
+ 	       	order by idx desc limit #{startpage},#{maxlist}
+ 	                	
+ 	</select>
+  -->	
+	
 	<!--4-1. idx에 해당하는 글 조회수 증가-->
 	<update id="noticeHits">
 		update tbl_notice set readcnt = readcnt + 1 where idx = #{idx}

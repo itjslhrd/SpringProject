@@ -137,6 +137,27 @@
  	       	             order by idx desc 
  	                           offset #{offset} rows fetch next #{maxlist} rows only 	
  	</select>
+
+	<!-- MySQL 용  --> 	
+ 	<!-- 검색조건 + 페이지 인덱싱 리스트 (get, post 겸용)-->
+<!--  	
+ 	<select id="boardList" resultType="com.mnu.sample.domain.BoardDTO">
+	     select * from tbl_board	
+	     	<choose>
+	     		<when test="search=='name'">
+	     			where name like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='subject'">
+	     			where subject like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='contents'">
+	     			where contents like concat('%',#{key},'%')
+	     		</when>
+	     	</choose>
+ 	       	order by idx desc limit #{startpage},#{maxlist}
+ 	                	
+ 	</select>
+  -->	
  	
 	<!-- 5. 글 등록 -->
 	<insert id="boardWrite">

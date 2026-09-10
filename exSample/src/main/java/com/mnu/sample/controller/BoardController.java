@@ -154,6 +154,10 @@ public class BoardController {
 		//게시글 일련번호 출력용
 		int listcount = totcount - ((nowpage-1) * maxlist);
 		
+		//페이지 시작번호(MySQL 사용시)
+		//int startpage = (nowpage-1)*maxlist;
+		//int listcount = totcount - startpage;//리스트에 일괄적으로 번호 부여시 사용
+
 		pageSearchDTO.setOffset(offset);
 		pageSearchDTO.setMaxlist(maxlist);
 		
