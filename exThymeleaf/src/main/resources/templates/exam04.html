@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<!--  리터럴(상수), text, 사칙연산. 논리연산 -->
+<!-- [  >(gt), <(lt), >=(ge), <=(le), ==(eq), !=(ne) -->
+문자열 연결 : <span th:text="${id} + ',' +  ${name}"></span><br>
+문자 대체 : <span th:text="|아이디:${id}, 이름:${name}|"></span><br>
+사칙연사(+,-,*,/,%) : <span th:text="${score+10}"></span><br>
+사칙연사(+,-,*,/,%) : <span th:text="${score/10}"></span><br>
+사칙연사(+,-,*,/,%) : <span th:text="${score%10}"></span><br>
+and : <span th:text="${score}>90 and ${score}<100"></span><br>
+or :<span th:text="${score>90} or ${gender}==true"></span><br>
+not :<span th:text="not(${score}>90)"></span><br>
+<hr>
+<!--  비교판단( if, switch) -->
+성별 판단 : <span th:if="${gender==true}">남자</span>
+		  <span th:if="${gender!=true}">남자</span>
+		  <span th:if="${gender}">남자</span><br><br>
+<!-- 거짓이면  -->		  
+성별 판단 : <span th:text="여자" th:unless="${gender==true}"></span>
+          <span th:text="남자" th:unless="${gender!=true}"></span> <br>
+<!--  삼항연산자 -->         
+성별 판단 : <span th:text="${gender==true ? '남자' : '여자'}"></span>	
+<!-- switch -->
+<span th:text="'점수 :' + ${score/10}"></span><br>
+판정 :  
+<div th:switch="${score/10}">
+	<span th:case="10">수</span>
+	<span th:case="9">수</span>
+	<span th:case="8">우</span>
+	<span th:case="7">미</span>
+	<span th:case="6">양</span>
+	<span th:case="*">가</span>
+	
+</div>          
+</body>
+</html>

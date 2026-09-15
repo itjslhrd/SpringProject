@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+전체 부서 수 : <b th:text="${#lists.size(list)}"></b>
+<table border="1" whdth="200">
+	<tr>
+		<td>순번</td><td>부서번호</td><td>부서명</td><td>지역명</td>
+	</tr>
+	<tr th:each="dto, i : ${list}"><!-- i는 상태변수 -->
+		<td th:text="${i.count}"></td> <!-- i.index => 0 부터 -->
+		<td th:text="${dto.dno}"></td>
+		<td th:text="${dto.dname}"></td>
+		<td th:text="${dto.loc}"></td>
+	</tr>
+	
+</table>
+</body>
+</html>

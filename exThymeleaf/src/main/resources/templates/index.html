@@ -1,0 +1,19 @@
+<!--  include -->
+<th:block th:replace="~{Include/topmenu}"></th:block>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>Hello Thymelef Project</h1>
+	<!-- 타임리프 하이퍼 링크 -->
+	<h3><a href="http://www.naver.com">네이버</a></h3>
+	<h3><a th:href="@{http://www.naver.com}">네이버</a></h3>
+	<h3><a th:href="@{/Board/board_list}">게시판</a></h3>
+	<h3><a th:href="@{/Board/board_list(page=1,idx=10)}">게시판</a></h3>
+	
+</body>
+</html>
