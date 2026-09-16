@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+
+</head>
+<body>
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Process</title>
+</head>
+<body>
+
+    <!-- 1. user 객체가 비어있을 때 (로그인 실패) -->
+    <th:block th:if="${session.user == null}">
+        <script>
+            alert("아이디가 없거나 비밀번호가 맞지 않습니다");
+            history.back();
+        </script>
+    </th:block>
+
+    <!-- 2. user 객체가 존재할 때 (로그인 성공) -->
+    <th:block th:unless="${session.user == null}">
+        <script>
+            location.href = "/";
+        </script>
+    </th:block>
+
+</body>
+</html>
+
+
+</body>
+</html>

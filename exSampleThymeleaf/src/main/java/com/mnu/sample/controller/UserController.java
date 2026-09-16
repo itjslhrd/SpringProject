@@ -80,34 +80,6 @@ public class UserController {
 		return "User/user_insert";
 	}
 	
-	//ID 중복검사
-	@ResponseBody
-	@PostMapping("user_idCheck")
-	public String userIdCheck(@RequestParam("userid") String userid) {
-		log.info("User Call : user_idCheck");
-		int row = userService.userIdCheck(userid);
-		return String.valueOf(row);
-	}
-	
-	//보인인증(SMS)
-	@ResponseBody
-	@PostMapping("user_sms")
-	public String smsSend(@RequestParam("tel") String tel) {
-		String tempNum = userService.sendSMS(tel);
-		
-		log.info("인증번호 : " + tempNum);
-		return tempNum;
-	}
-		
-	//보인인증(email)
-	@ResponseBody
-	@PostMapping("user_email")
-	public String emailSend(@RequestParam("email") String email) {
-		String tempNum = emailService.sendEmail(email);
-		
-		log.info("인증번호 : " + tempNum);
-		return tempNum;
-	}
 	
 	//회원가입처리
 	@PostMapping("user_insert")

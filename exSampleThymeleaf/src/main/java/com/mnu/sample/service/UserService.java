@@ -90,4 +90,8 @@ public class UserService {
 	
 	//5. 이메일 인증 구현
 	
+	//userid을 이용한 사용자 검색
+	public UserDTO getUserid(String userid) {
+		return userMapper.getUserid(userid);
+	}
 }

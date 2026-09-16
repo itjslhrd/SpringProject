@@ -18,7 +18,8 @@ public interface UserMapper {
 	//4. 로그인한 날자 업데이트
 	public void userLastTimeUpdate(String userid);
 	
-	
+	//5. userid을 이용한 사용자 검색
+	public UserDTO getUserid(String userid);
 	
 	
 }

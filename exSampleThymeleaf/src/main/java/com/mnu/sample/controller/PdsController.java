@@ -10,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -26,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriUtils;
 
 import com.mnu.sample.domain.PageSearchDTO;
@@ -43,6 +43,9 @@ public class PdsController {
 	//로그 출력용
 	private static final Logger log =
 			LoggerFactory.getLogger(PdsController.class);
+	
+	@Value("${file.upload-dir}")
+    private String uploadDir;//파일저장 경로(application.yum에 설정)
 	
 	@Autowired
 	private PdsService pdsService;
@@ -121,8 +124,7 @@ public class PdsController {
 		pdsDTO.setPass(request.getParameter("pass"));
 		
 		MultipartFile mf = request.getFile("filename");
-		//저장경로 설정 src/main/webapp/upload 폴더 생성
-		String path = request.getServletContext().getRealPath("/upload/");
+
 		//파일이름 추출
 		String fileName = mf.getOriginalFilename();
 		long fileSize = mf.getSize();//파일용량 
@@ -130,7 +132,10 @@ public class PdsController {
 		pdsDTO.setFilename(fileName);
 		
 		//실제 파일 저장
-		File file = new File(path+fileName);//파일 객체 생성
+		//@Value("${file.upload-dir}")
+	    //private String uploadDir;//파일저장 경로(application.yum에 설정)
+
+		File file = new File(uploadDir+fileName);//파일 객체 생성
 		try {
 			mf.transferTo(file);//파일저장
 		}catch(Exception e) {
@@ -150,10 +155,11 @@ public class PdsController {
                                               HttpServletRequest request) {        
         try {
             // 1. 업로드 때와 동일한 서블릿 컨텍스트 상의 실제 물리 경로 획득
-            String uploadPath = request.getServletContext().getRealPath("/upload/");
+    		    //@Value("${file.upload-dir}")
+    	        //private String uploadDir;//파일저장 경로(application.yum에 설정)
             
             // 2. 보안을 위해 상위 디렉토리 접근 차단(.normalize()) 및 경로 병합
-            Path path = Paths.get(uploadPath).resolve(filename).normalize();
+            Path path = Paths.get(uploadDir).resolve(filename).normalize();
             Resource resource = new UrlResource(path.toUri());
 
             // 3. 파일 존재 및 읽기 가능 여부 체크
@@ -208,14 +214,16 @@ public class PdsController {
 		
 		MultipartFile mf = request.getFile("filename");
 		// 업로드 경로 설정
-		//String path=request.getRealPath("/upload/");
-		String path = request.getServletContext().getRealPath("/upload/");
+		//실제 파일 저장
+		//@Value("${file.upload-dir}")
+	    //private String uploadDir;//파일저장 경로(application.yum에 설정)
+		
 		String fileName=mf.getOriginalFilename();
 		if(fileName.equals("")) {
 			dto.setFilename(oldfilename);
 		}else {
-			File newFile=new File(path+fileName);
-			File oldFile=new File(path+oldfilename);
+			File newFile=new File(uploadDir+fileName);
+			File oldFile=new File(uploadDir+oldfilename);
 			try {
 				if(oldFile.exists()) {
 					oldFile.delete();// 파일삭제
@@ -248,7 +256,8 @@ public class PdsController {
 		//첨부파일삭제
 		if(row==1) {
 			if(filename != null) {
-				File file = new File(request.getServletContext().getRealPath("/upload/") + filename);
+				//File file = new File(request.getServletContext().getRealPath("/upload/") + filename);
+				File file = new File(uploadDir + filename);
 				file.delete();
 			}
 		}	

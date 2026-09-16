@@ -22,5 +22,9 @@
 		update tbl_user set last_time=sysdate where userid=#{userid}
 	</update>
 	
+	<!-- userid을 이용한 사용자 검색 -->
+	<select id="getUserid" resultType="com.mnu.sample.domain.UserDTO">
+		select * from tbl_user where userid=#{userid}
+	</select>
 	
 </mapper>

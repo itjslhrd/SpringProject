@@ -66,11 +66,13 @@ public class BoardService {
 		boolean bool = false;
 		Cookie info = null;
 		Cookie[] cookies = request.getCookies();
-		for(int i=0; i<cookies.length; i++) {
-			info = cookies[i];
-			if(info.getName().equals("boardCookie"+idx)) {
-				bool = true;
-				break;
+		if (cookies != null) {
+			for(int i=0; i<cookies.length; i++) {
+				info = cookies[i];
+				if(info.getName().equals("boardCookie"+idx)) {
+					bool = true;
+					break;
+				}
 			}
 		}
 		String str = ""+System.currentTimeMillis();

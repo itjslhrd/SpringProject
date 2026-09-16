@@ -15,12 +15,13 @@ spring:
     username: webs1027@gmail.com
     password: lehevmtcnhubnazl
     
-  properties:
-    mail:
-      smtp:
-        auth: true
-        starttls:
-        enable: true
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 # mapper.xml  위치 : resources폴더안에 mappers 폴더를 생성
 mybatis:
@@ -29,6 +30,15 @@ mybatis:
 # coolssms key
 coolsms:
   apikey: NCSD2HB2VHKQWCHG
-  apisecret: VY9KV8TXAMQWYDU46ZAJDD0HDH0M8WZ
+  apisecret: PVY9KV8TXAMQWYDU46ZAJDD0HDH0M8WZ
   fromnumber: 01022423810
   url: https://api.coolsms.co.kr
+
+# 파일 업로드 용량 설정
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+# 파일이 실제 저장될 외부 절대 경로 정의
+file:
+  upload-dir: C:/Users/websnet/uploads/

@@ -99,8 +99,8 @@
 	<!-- 5. 글 등록 -->
 	<insert id="pdsWrite">
 		insert into tbl_pds(idx, name, email,subject, contents, pass, filename)
-		       values(tbl_board_seq_idx.nextval,#{name},#{email},#{subject},
-		                                      #{contents},#{pass}, #{filename})
+		       values(tbl_pds_seq_idx.nextval,#{name},#{email},#{subject},
+		                                      #{contents},#{pass},#{filename})
 	</insert>
 	<!-- 6. 특정글 검색(view, 수정) -->
 	<update id="pdsHits">
