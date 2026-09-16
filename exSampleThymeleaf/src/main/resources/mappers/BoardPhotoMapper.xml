@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mnu.sample.mapper.BoardPhotoMapper">
+	<!-- 최근 글 n개 리스트 -->
+	<select id="boardTopList" resultType="com.mnu.sample.domain.BoardPhotoDTO">
+		select * from 
+             (select * from tbl_boardphoto order by idx desc)
+             <![CDATA[
+                    where rownum <= #{num}
+             ]]>
+             <!-- WHERE rownum &lt;= #{num}  -->
+	</select>
+	
+	<!-- oracle12c 이상 최근 글 n개 리스트 -->
+	<select id="boardTopList2" resultType="com.mnu.sample.domain.BoardPhotoDTO">
+		SELECT * FROM tbl_boardphoto
+                ORDER BY idx DESC
+                         FETCH FIRST #{num} ROWS ONLY;
+	</select>
+	
+	<!-- 1. 검색조건에 해당하는 글수 get, post 겸용 -->
+	<select id="boardCount" resultType="int">
+	     select count(*) from tbl_boardphoto  
+	     	<choose>
+	     		<when test="search=='name'">
+	     			where name like '%'||#{key}||'%'
+	     		</when>
+	     		<when test="search=='subject'">
+	     			where subject like '%'||#{key}||'%'
+	     		</when>
+	     		<when test="search=='contents'">
+	     			where contents like '%'||#{key}||'%'
+	     		</when>
+	     	</choose>
+	</select>
+
+	<!-- 1. 검색조건에 해당하는 글수 get, post 겸용 MySQL(MariDB)  -->
+<!-- 	
+	<select id="boardCount" resultType="int">
+	     select count(*) from tbl_boardphoto  
+	     	<choose>
+	     		<when test="search=='name'">
+	     			where name like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='subject'">
+	     			where subject like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='contents'">
+	     			where contents like concat('%',#{key},'%')
+	     		</when>
+	     	</choose>
+	</select>
+ -->
+ 	<!-- 2.  검색조건 + 페이지 인덱싱 리스트 (get, post 겸용)-->
+ 	<select id="boardList" resultType="com.mnu.sample.domain.BoardPhotoDTO">
+ 	      select * from tbl_boardphoto  
+ 	      	     	<choose>
+	     		        <when test="search=='name'">
+	     			        where name like '%'||#{key}||'%'
+	     		        </when>
+	     		        <when test="search=='subject'">
+	     			        where subject like '%'||#{key}||'%'
+	     		        </when>
+	     		        <when test="search=='contents'">
+	     			        where contents like '%'||#{key}||'%'
+	     		        </when>
+	     	       </choose>
+ 	       	             order by idx desc 
+ 	                           offset #{offset} rows fetch next #{maxlist} rows only 	
+ 	</select>
+
+	<!-- MySQL 용  --> 	
+ 	<!-- 2. 검색조건 + 페이지 인덱싱 리스트 (get, post 겸용)-->
+<!--  	
+ 	<select id="boardList" resultType="com.mnu.sample.domain.BoardPhotoDTO">
+	     select * from tbl_boardphoto  
+	        	<choose>
+	     		<when test="search=='name'">
+	     			where name like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='subject'">
+	     			where subject like concat('%',#{key},'%')
+	     		</when>
+	     		<when test="search=='contents'">
+	     			where contents like concat('%',#{key},'%')
+	     		</when>
+	     	</choose>
+ 	       	order by idx desc limit #{startpage},#{maxlist}
+ 	                	
+ 	</select>
+  -->	
+	<!-- 3. 글 등록 -->
+	<insert id="boardWrite">
+		insert into tbl_boardphoto(idx, name, email,subject, contents, pass)
+		       values(tbl_boardphoto_seq_idx.nextval,#{name},#{email},#{subject},#{contents},#{pass})
+	</insert>
+	
+	<!-- 4. 특정글 조회수 증가 -->
+	<update id="boardHits">
+		update tbl_boardphoto set readcnt = readcnt + 1 where idx = #{idx}
+	</update>
+	
+	<!-- 5. 특정글 검색(view, 수정) -->
+	<select id="boardSelect" resultType="com.mnu.sample.domain.BoardPhotoDTO">
+		select * from tbl_boardphoto where idx = #{idx}
+	</select>
+	
+	<!-- 6. 수정처리 -->
+	<update id="boardModify">
+		update tbl_boardphoto set email=#{email}, subject=#{subject}, contents=#{contents}
+						where idx=#{idx} and pass=#{pass}
+	</update>
+	
+	<!-- 7. 삭제처리 -->
+	<delete id="boardDelete">
+		delete from tbl_boardphoto where idx=#{idx} and pass=#{pass}
+	</delete>
+
+</mapper>

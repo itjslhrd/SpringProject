@@ -8,8 +8,27 @@ spring:
     username: SAMPLE
     password: 1234
 
+# Google Email 인증
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: webs1027@gmail.com
+    password: lehevmtcnhubnazl
+    
+  properties:
+    mail:
+      smtp:
+        auth: true
+        starttls:
+        enable: true
+
 # mapper.xml  위치 : resources폴더안에 mappers 폴더를 생성
 mybatis:
   mapper-locations: "classpath:/mappers/**/*.xml"
 
-
+# coolssms key
+coolsms:
+  apikey: NCSD2HB2VHKQWCHG
+  apisecret: VY9KV8TXAMQWYDU46ZAJDD0HDH0M8WZ
+  fromnumber: 01022423810
+  url: https://api.coolsms.co.kr
