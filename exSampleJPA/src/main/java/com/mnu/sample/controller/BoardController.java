@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mnu.sample.dto.BoardRequestDTO;
 import com.mnu.sample.dto.BoardResponseDTO;
+import com.mnu.sample.exception.CustomException;
 import com.mnu.sample.service.BoardService;
 
 import lombok.RequiredArgsConstructor;
@@ -144,7 +144,13 @@ public class BoardController {
 	public String boardModifyPro(@RequestParam("idx") int idx, @ModelAttribute("page") int page, BoardRequestDTO board, Model model) {
 		log.info("Board Call : board_modify_pro");
 		
-		model.addAttribute("row", boardService.boardModifyPro(idx, board));
+		int result = boardService.boardModifyPro(idx, board);
+		//결과 같이 0이면 사용자 예외발생 던지기
+		if(result==0) {
+			throw new CustomException("비밀번호가 맞지않습니다.");
+		}
+		
+		model.addAttribute("row", result);//
 		return "Board/board_modify_pro";
 	}
 }

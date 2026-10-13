@@ -181,12 +181,12 @@ $(document).ready(function() {
                                 <tr>
                                   <td width="21"><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 
                                   <td width="70" nowrap><b>회원명</b></td> 
-                                  <td>: 홍길동 님 (일반회원)</td> 
+                                  <td>:  <span th:text="${session.user.name}"></span> 님 (일반회원)</td> 
                                 </tr>
                                 <tr>
                                   <td><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 
                                   <td nowrap><b>아이디</b></td> 
-                                  <td>: hong123</td> 
+                                  <td>: <span th:text="${session.user.userid}"></span></td> 
                                 </tr>
                                 <tr>
                                   <td><img src="/Images/img/h_bl02.gif" width="18" height="16"></td> 

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.mnu.sample.dto.BoardRequestDTO;
 import com.mnu.sample.dto.BoardResponseDTO;
 import com.mnu.sample.entity.BoardEntity;
+import com.mnu.sample.exception.CustomException;
 import com.mnu.sample.repository.BoardRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -111,7 +112,9 @@ public class BoardService {
 	public BoardResponseDTO boardModify(int idx) {
 		BoardEntity boardEntity = boardRepository.findById(idx)
 				.orElseThrow(()->new IllegalArgumentException("idx 없음"));
-	
+	          //.orElseThrow(() -> new CustomException("존재하지 idx입니다."));
+		      // 위로 던지기(비스에서는 예외를 try-catch로 잡아서 해결하려고 하지 말고, 
+		      //상황에 맞는 CustomException으로 전환하여 컨트롤러 방향으로 던집니다.
 		BoardResponseDTO board = new BoardResponseDTO(boardEntity);
 		return board;
 	}

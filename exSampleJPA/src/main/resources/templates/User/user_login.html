@@ -25,7 +25,22 @@
 		}
 		user.submit();
 	}
+	
+	
 </script>
+
+<!-- 사용자 스크립트 추가(에러 출력용) -->
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		$(document).ready(function(){
+			var errorMessage = [[${errorMessage}]];
+			if(errorMessage != null){
+				alert(errorMessage);
+			}
+		});
+	</script>
+</th:block>
+
 </HEAD>
 <body bgcolor="#FFFFFF" text="#000000" leftmargin=0 
   topmargin=0 onLoad='document.user.userid.focus();'>

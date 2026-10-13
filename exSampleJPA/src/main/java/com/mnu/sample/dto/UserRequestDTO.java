@@ -42,6 +42,7 @@ public class UserRequestDTO {
 				.userid(userid)
 				.name(name)
 				.passwd(passwd)
+				.gubun(gubun)
 				.tel(tel)
 				.email(email)
 				.build();
