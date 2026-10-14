@@ -37,3 +37,13 @@ coolsms:
   apisecret: PVY9KV8TXAMQWYDU46ZAJDD0HDH0M8WZ
   fromnumber: 01022423810
   url: https://api.coolsms.co.kr
+
+#파일 저장경로 설정
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+file:
+  dir: C:/Users/websnet/upload/ # 서버 내 파일 저장 경로 지정 (운영체제에 맞게 수정)
+#	dir: /var/web_uploads/pds/ // Linux 예시

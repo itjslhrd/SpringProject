@@ -96,7 +96,7 @@ public class BoardController {
 		if(row==0) {
 			return "Board/board_write";
 		}else {
-			return "redirect:board_list";
+			return "redirect:board_list?page="+page;//가능
 		}
 		
 	}
