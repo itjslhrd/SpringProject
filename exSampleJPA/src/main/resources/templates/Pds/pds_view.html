@@ -61,9 +61,11 @@
                <font size="2" face="돋움" th:text="${pds.name}"></font> / 
                <font size="2" face="돋움" th:text="|${pds.regdate} / ${pds.readcnt}번 읽음|"></font>
              </p>  
-               <p th:utext="${pds.contents}"><p><!--contents의 내용을 <BR>태그로 처리-->
+               <p th:utext="${#strings.replace(pds.contents,newLineChar,'&lt;br/;&gt;')}"><p><!--contents의 내용을 <BR>태그로 처리-->
 			   <span th:if="${pds.filename!=null}">
-			      <img src="/Images/img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;<a class="list" th:href="@{/Pds/down_load(filename=${pds.filename})}"><span th:text="${pds.filename}"></span></a>
+			      <img src="/Images/img/disk.gif" align="middle" width="22" height="20" border="0">&nbsp;
+			      <a class="list" th:href="@{/Pds/down_load(filename=${pds.filename})}">
+			      	<span th:text="${pds.filename}"></span></a>
 			   </span>
 			</td>
 		</tr>
@@ -77,7 +79,7 @@
        <a th:href="@{/Pds/pds_modify(idx=${pds.idx}, page=${page})}">
        <img src="/Images/img/edit.gif" border="0"></a>&nbsp;&nbsp;
          <!-- 삭제하기 -->
-       <a th:onclick="|javascript:pds_del('${pds.idx}','${1}')|"><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
+       <a th:onclick="|javascript:pds_del('${pds.idx}','${page}')|"><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
 	   <!-- 삭제 button 사용시 -->
        <button th:onClick="/Pds/pds_del2([[${pds.idx}]],[[${page}]])">[삭제2]</button>
        

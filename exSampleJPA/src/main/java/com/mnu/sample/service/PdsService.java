@@ -48,6 +48,32 @@ public class PdsService {
 		//등록후 등록된 idx 반환
 	}
 	
+	// 글 상세보기
+	@Transactional
+	public PdsResponseDTO pdsView(int idx) {
+		//조회수 증가
+		pdsRepository.pdsHits(idx);
+		
+		PdsEntity pdsEntity = pdsRepository.findById(idx)
+				.orElseThrow(()->new IllegalArgumentException("idx 없음"));
+		
+		PdsResponseDTO pds = new PdsResponseDTO(pdsEntity);
+		return pds;
+	}
+
+/*	
+	//글 삭제(무조건 삭제시 : 비밀번호 관계없이)
+	@Transactional
+	public void pdsDelete(int idx) {
+		pdsRepository.deleteById(idx);//idx에 해다하는 글 삭제
+	}
+*/
+	//글 삭제(idx, pass 이용)
+	@Transactional
+	public int pdsDelete(int idx, String pass) {
+		return pdsRepository.pdsDelete(idx, pass);//idx에 해당하는 글 삭제
+	}
+	
 /*
 	// 전체 목록(검색 X, 페이지 처리 )
 	@Transactional

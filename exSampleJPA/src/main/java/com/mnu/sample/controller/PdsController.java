@@ -27,6 +27,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriUtils;
 
 import com.mnu.sample.dto.PdsRequestDTO;
+import com.mnu.sample.dto.PdsResponseDTO;
 import com.mnu.sample.service.PdsService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -67,6 +68,8 @@ public class PdsController {
 	
 	@PostMapping("pds_write")
 	public String pdsWritePro(@RequestParam("page") int page, MultipartHttpServletRequest request, Model model) {
+		log.info("Pds Call : pds_write_pro : ");
+		
 		PdsRequestDTO pdsDTO = new PdsRequestDTO();
 		pdsDTO.setName(request.getParameter("name"));
 		pdsDTO.setSubject(request.getParameter("subject"));
@@ -94,6 +97,19 @@ public class PdsController {
 */		
 	}
 	
+	//글 상세보기
+	@GetMapping("pds_view")
+	public String pdsView(@RequestParam("idx") int idx, 
+						@ModelAttribute("page") int page, Model model) {
+		
+		log.info("Pds Call : pds_view : ");
+		
+		PdsResponseDTO pds = pdsService.pdsView(idx);
+		model.addAttribute("pds", pds);
+		model.addAttribute("newLineChar", "\n");//글 상세보기에서 <br> 처리용
+		
+		return "/Pds/pds_view";
+	}
 
 	// 기존 업로드와 동일한 경로를 얻기 위해 request 주입
 	// 파일다운로드
@@ -130,4 +146,37 @@ public class PdsController {
         }
     }	
 
+	//삭제 폼
+	@GetMapping("pds_delete")
+	public String pdsDelete(@ModelAttribute("page") int page, @ModelAttribute("idx") int idx) {
+		log.info("Call  :  pds_delete (삭제 폼)" );
+		return "/Pds/pds_delete";
+	}
+	
+	//삭제처리
+	@PostMapping("pds_delete")
+	public String pdsDeletePro(@RequestParam("idx") int idx, @RequestParam("pass") String pass, 
+			@ModelAttribute("page") int page, Model model) {
+		log.info("Call  :  pds_delete (삭제 처리)" );
+		
+		PdsResponseDTO pdsResponseDTO = pdsService.pdsView(idx);
+		//첨부파일이 있는 경우 파일부터 삭제
+		if(pdsResponseDTO.getFilename() != null) {
+			File file = new File(fileDir + pdsResponseDTO.getFilename());
+			file.delete();
+		}
+		
+		int row = pdsService.pdsDelete(idx, pass);
+		model.addAttribute("row", row);
+		
+		return "/Pds/pds_delete_pro";
+	}
+	
+	//수정 폼
+	
+	
+	//수정처리
+	
+	
+	
 }
