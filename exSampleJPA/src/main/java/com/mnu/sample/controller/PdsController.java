@@ -173,9 +173,60 @@ public class PdsController {
 	}
 	
 	//수정 폼
-	
-	
+	//삭제 폼
+	@GetMapping("pds_modify")
+	public String pdsModify(@ModelAttribute("page") int page, 
+			@ModelAttribute("idx") int idx, Model model) {
+		log.info("Call  :  pds_modify (수정 폼)" );
+		
+		model.addAttribute("pds", pdsService.pdsView(idx));
+		return "/Pds/pds_modify";
+	}
+
 	//수정처리
+	@PostMapping("pds_modify")
+	public String pdsModifyPro(@RequestParam("page") int page, MultipartHttpServletRequest request, Model model) {
+		log.info("Pds Call : pds_modify_pro : ");
+		
+		PdsRequestDTO pdsDTO = new PdsRequestDTO();
+		pdsDTO.setName(request.getParameter("name"));
+		pdsDTO.setSubject(request.getParameter("subject"));
+		pdsDTO.setContents(request.getParameter("contents"));
+		pdsDTO.setPass(request.getParameter("pass"));
+		String oldfilename = request.getParameter("oldfilename");//구파일
+		int idx = Integer.parseInt(request.getParameter("idx"));//기본키
+		
+		//파일 저장경로 설정
+		//String path = request.getServletContext().getRealPath("/upload/");
+		MultipartFile mf = request.getFile("filename");
+		String fileName = mf.getOriginalFilename();
+		
+		if(fileName.equals("")) {
+			pdsDTO.setFilename(oldfilename);
+		}else {
+			File newFile=new File(fileDir+fileName);
+			File oldFile=new File(fileDir+oldfilename);
+			try {
+				if(oldFile.exists()) {
+					oldFile.delete();// 파일삭제
+				}
+				mf.transferTo(newFile);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			pdsDTO.setFilename(fileName);
+		}
+		
+		int row = pdsService.pdsModify(idx, pdsDTO);
+/*
+		//return "redirect:pds_list?page=1";// 경고없이 리스트로 이동(controller)
+		return "redirect:pds_list?page=" + page;// 경고없이 리스트로 이동(controller)
+*/		
+
+		model.addAttribute("row", row);
+		model.addAttribute("page", page);
+		return "/Pds/pds_modify_pro";
+	}
 	
 	
 	

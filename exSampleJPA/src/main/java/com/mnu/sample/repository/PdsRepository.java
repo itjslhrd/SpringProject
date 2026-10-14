@@ -34,4 +34,16 @@ public interface PdsRepository extends JpaRepository<PdsEntity, Integer> {
 	@Query("delete from PdsEntity pds where pds.idx= :idx and pds.pass= :pass")
 	int pdsDelete(@Param("idx") int idx, @Param("pass") String pass);
 	
+	//수정처리
+	@Transactional
+	@Modifying
+	@Query("update PdsEntity pds set pds.subject = :subject, pds.contents= :contents, "
+			+ " pds.filename= :filename  where pds.idx = :idx and pds.pass= :pass")
+	int pdsModify(@Param("idx") int idx, @Param("subject") String subject,
+							@Param("contents") String contents, 
+							@Param("filename") String filename, 
+							@Param("pass") String pass);
+	
+	
+	
 }

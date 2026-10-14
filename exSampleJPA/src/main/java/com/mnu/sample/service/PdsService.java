@@ -74,6 +74,14 @@ public class PdsService {
 		return pdsRepository.pdsDelete(idx, pass);//idx에 해당하는 글 삭제
 	}
 	
+	//글 수정
+	@Transactional
+	public int pdsModify(int idx, PdsRequestDTO pdsRequestDTO) {
+		return pdsRepository.pdsModify(idx, pdsRequestDTO.getSubject(), 
+				pdsRequestDTO.getContents(), pdsRequestDTO.getFilename(), 
+				pdsRequestDTO.getPass());
+	}
+	
 /*
 	// 전체 목록(검색 X, 페이지 처리 )
 	@Transactional
