@@ -1,8 +1,11 @@
 package com.mnu.sample.service;
 
-import java.util.Comparator;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,7 @@ public class PdsService {
 		return pdsRepository.count();
 	}
 
+/*
 	// 전체 목록(검색, 페이지 처리 없음)
 	@Transactional
 	public List<PdsResponseDTO> pdsList(){
@@ -39,7 +43,7 @@ public class PdsService {
 		// PdsRepository결과로 넘어온 PdsEntity의 Stream을 map을 통해 PdsReponseDto로 변환 
         //   -> List로 반환하는 메서드
 	}
-
+*/
 	// 등록 처리
 	@Transactional
 	public int pdsWrite(PdsRequestDTO pdsRequestDTO){
@@ -82,7 +86,7 @@ public class PdsService {
 				pdsRequestDTO.getPass());
 	}
 	
-/*
+
 	// 전체 목록(검색 X, 페이지 처리 )
 	@Transactional
 	public Page<PdsResponseDTO> pdsList(Pageable pageable){
@@ -98,7 +102,7 @@ public class PdsService {
 		page = pdsRepository.findAll(sortedPageable);
 		return page.map(PdsResponseDTO::new);
 	}
-/*	
+	
 	// 전체 목록(검색 , 페이지 처리 )
 	@Transactional
 	public Page<PdsResponseDTO> pdsListSearchPage(String search, String key, Pageable pageable){
@@ -122,24 +126,6 @@ public class PdsService {
 	}
 
 	
-	//상세보기(View)
-	@Transactional
-	public PdsResponseDTO pdsView(int idx) {
-		//조회수 증가
-		pdsRepository.pdsHits(idx);
-		
-		PdsEntity pdsEntity = pdsRepository.findById(idx)
-				.orElseThrow(()->new IllegalArgumentException("idx 없음"));
-	
-		PdsResponseDTO pds = new PdsResponseDTO(pdsEntity);
-		return pds;
-	}
-	
-	//삭제
-	@Transactional
-	public int pdsDelete(int idx, String pass) {
-		return pdsRepository.pdsDelete(idx, pass);
-	}
 
 	//수정폼(modify)
 	@Transactional
@@ -153,11 +139,6 @@ public class PdsService {
 		return pds;
 	}
 	
-	//수정처리
-	@Transactional
-	public int pdsModifyPro(int idx, PdsRequestDTO pds) {
-		return pdsRepository.pdsModify(idx, pds.getSubject(), pds.getContents(), pds.getPass());
-	}
 	
 	// 조건에 맞는 글수 카운트
 	@Transactional
@@ -200,6 +181,6 @@ public class PdsService {
 			return null;
 		}
 	}
-*/	
+
 	
 }

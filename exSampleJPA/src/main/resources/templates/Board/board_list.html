@@ -29,7 +29,18 @@
         <img src="/Images/img/bullet-01.gif"> <b>자 유 게 시 판</b></font></td></tr>
       <tr>
         <td colspan="5" align="right" valign="middle" height="20">
-		<font size="2" face="고딕">전체 : <b th:text="${totcount}"></b>건 - 1/ 2 Pages</font></td></tr>
+		<font size="2" face="고딕">전체 : 
+		   <!-- <b th:text="${#lists.size(bList)}"></b>건  1만 출력 -->
+		   <!-- Page 객체 자체를 타임리프의 #lists.size()에 넣었기 때문입니다. 
+		   Page는 List가 아니라 스프링 데이터가 제공하는 특별한 객체이므로, 
+		   타임리프가 이를 단일 객체로 인식해 무조건 **1**을 반환 -->
+		     <b th:text="${bList.totalElements}"></b>건 
+		     <!--  <b th:text="${#lists.size(bList.content)}">건</b> 현페이지 건수---->
+		     <!-- <b th:text="${bList.totalElements}"></b>건 페이지에 관계없이 전체 건수 -->
+		   
+		</font>
+		</td>
+	   </tr>
  	   <tr bgcolor="e3e9ff">
  	      <td width="10%" align="center" height="20"><font face="돋움" size="2">번 호</font></td>
  	      <td width="50%" align="center" height="20"><font face="돋움" size="2">제 목</font></td>

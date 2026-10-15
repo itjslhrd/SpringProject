@@ -45,5 +45,38 @@ public interface PdsRepository extends JpaRepository<PdsEntity, Integer> {
 							@Param("pass") String pass);
 	
 	
+	//검색(이름, 제목, 내용) 카운트
+	long countByNameContaining(String keyword);
+	//(name like '%keyword%')
+	long countBySubjectContaining(String keyword);
+	long countByContentsContaining(String keyword);
+	
+	
+	//검색 목록
+	//검색(이름, 제목, 내용) 목록
+	List<PdsEntity> findByNameContaining(String keyword);
+	//(name like '%keyword%')
+	List<PdsEntity> findBySubjectContaining(String keyword);
+	List<PdsEntity> findByContentsContaining(String keyword);
+	
+	//검색(이름, 제목, 내용)-> idx기준 내림차순
+	List<PdsEntity> findByNameContainingOrderByIdxDesc(String keyword);
+	List<PdsEntity> findBySubjectContainingOrderByIdxDesc(String keyword);
+	List<PdsEntity> findByContentsContainingOrderByIdxDesc(String keyword);
+
+	//페이지 인덱싱
+	//검색(이름,제목,내용) + PageIndexing
+	Page<PdsEntity> findByNameContainingOrderByIdxDesc(String keyword, Pageable pageable);	
+	Page<PdsEntity> findBySubjectContainingOrderByIdxDesc(String keyword, Pageable pageable);	
+	Page<PdsEntity> findByContentsContainingOrderByIdxDesc(String keyword, Pageable pageable);	
+	
+	//@Query 이용한 검색 + Page
+	@Query("select pds from PdsEntity pds "
+			+ " where (:search='name' and pds.name like %:key%) "
+			+ " or (:search='subject' and pds.subject like %:key%) "
+			+ " or (:search='contents' and pds.contents like %:key%) "
+			+ " order by pds.idx desc")
+	Page<PdsEntity> pdsListSearchPage(@Param("search") String search, 
+										@Param("key") String key, Pageable pageable);
 	
 }

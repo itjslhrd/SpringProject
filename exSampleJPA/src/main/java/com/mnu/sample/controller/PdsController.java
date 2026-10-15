@@ -11,6 +11,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,13 +48,53 @@ public class PdsController {
 	private String fileDir;
 	
 	private final PdsService pdsService;//서비스 주입
-	
+/*	
 	//전체(검색 X, 페이지 X)
 	@GetMapping("pds_list")
 	public String pdsList(@ModelAttribute("page") int page, Model model) {
 		log.info("Pds Call : pds_list");
 		model.addAttribute("pList", pdsService.pdsList());
 		model.addAttribute("totcount", pdsService.pdsCount());
+		
+		return "/Pds/pds_list";
+	}
+*/
+	/*
+	//전체(검색 X, 페이지 O)
+	@GetMapping("pds_list")
+	public String pdsList(Model model, @PageableDefault(size=10) Pageable pageable) {
+		log.info("Pds Call : pds_list");
+		model.addAttribute("pList", pdsService.pdsList(pageable));
+		model.addAttribute("totcount", pdsService.pdsCount());
+		
+		return "/Pds/pds_list";
+	}
+
+	
+	//검색
+	@PostMapping("pds_list")
+	public String pdsListSearch(@RequestParam("search") String search, 
+									@RequestParam("key") String key, Model model) {
+		log.info("Pds Call : pds_list_search");
+		
+		model.addAttribute("pList", pdsService.pdsListSearch(search, key));
+		model.addAttribute("totcount", pdsService.pdsCountSearch(search, key));
+		
+		model.addAttribute("search", search);
+		model.addAttribute("key", key);
+		return "/Pds/pds_list";
+	}
+*/
+	//검색 + 페이지 처리 + get+post
+	@GetMapping("pds_list")
+	public String pdsListSearchPage(@ModelAttribute("page") int page, @RequestParam(value="search", required=false) String search, 
+										@RequestParam(value="key", required=false) String key, 
+											@PageableDefault(size=10) Pageable pageable, Model model) {
+
+		Page<PdsResponseDTO> result = pdsService.pdsListSearchPage(search, key, pageable);
+		model.addAttribute("pList", result);
+		model.addAttribute("search", search);
+		model.addAttribute("key", key);
 		
 		return "/Pds/pds_list";
 	}
@@ -218,11 +261,7 @@ public class PdsController {
 		}
 		
 		int row = pdsService.pdsModify(idx, pdsDTO);
-/*
-		//return "redirect:pds_list?page=1";// 경고없이 리스트로 이동(controller)
-		return "redirect:pds_list?page=" + page;// 경고없이 리스트로 이동(controller)
-*/		
-
+		//수정성공시 1 / 실패시 0
 		model.addAttribute("row", row);
 		model.addAttribute("page", page);
 		return "/Pds/pds_modify_pro";
